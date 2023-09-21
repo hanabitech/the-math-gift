@@ -15,7 +15,6 @@ import ListItemText from "@mui/material/ListItemText";
 import { fabric } from "fabric";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { Button } from "@mui/material";
 
 function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -39,6 +38,11 @@ function App() {
       preserveObjectStacking: true,
       isDrawingMode: true,
     });
+
+    canvasInstance.current.setBackgroundImage(
+      "./test.webp",
+      canvasInstance.current.renderAll.bind(canvasInstance.current)
+    );
   }, []);
 
   return (
@@ -97,13 +101,6 @@ function App() {
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Toolbar />
-          <Button
-            onClick={() => {
-              canvasInstance.current?.renderAndReset();
-            }}
-          >
-            Reset
-          </Button>
           <canvas ref={canvasRef} id="primary-canvas" className="canvas" />
         </Box>
       </Box>
